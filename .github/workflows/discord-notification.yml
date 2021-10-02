@@ -6,11 +6,11 @@ on:
     - master
 
 jobs:
-  notification:
+  discord-notification:
     runs-on: ubuntu-latest
     steps:
     - name: Print
-      run: echo ${{ secrets }}
+      run: echo ${{ secrets.DISCORD_WEBHOOK }}
     - name: Discord notification
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
