@@ -1,16 +1,15 @@
 name: Discord Notification on push
 
-on:
+on:  
   push:
+  pull_request:
     branches:
-    - master
+      - master
 
 jobs:
   discord-notification:
     runs-on: ubuntu-latest
     steps:
-    - name: Print
-      run: echo ${{ secrets.DISCORD_WEBHOOK }}
     - name: Discord notification
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
