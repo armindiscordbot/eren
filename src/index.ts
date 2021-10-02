@@ -1,21 +1,25 @@
-const fs = require('fs');
-const { Client, Collection, Intents } = require('discord.js');
-const { token } = require('./config');
+import fs from 'fs';
+import consola from 'consola';
+import Client from './baseClient';
+import environment from './environment';
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const { token } = environment;
 
-client.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const client = new Client();
+
+const commandFiles = fs.readdirSync(`${__dirname}/commands`).filter((file: any) => file.endsWith('.js'));
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.data.name, command);
 }
 
 client.once('ready', () => {
-	console.log('Ready!');
+	if (client && client.user) {
+		consola.success(`Logged in as ${client.user.username}#${client.user.discriminator}`);
+	}
 });
 
-client.on('interactionCreate', async interaction => {
+client.on('interactionCreate', async (interaction: any) => {
 	if (!interaction.isCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);
