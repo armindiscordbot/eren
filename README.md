@@ -19,6 +19,7 @@ Eren is an experimental project so its functionalities are unknown at the moment
 - NodeJS v16.9.0
 - [discord.js](https://discord.js.org/#/)
 - [discordjs.guide](https://discordjs.guide/)
+- GitHub Actions
 
 ## Author
 
