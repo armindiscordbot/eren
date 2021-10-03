@@ -8,9 +8,13 @@ const { token } = environment;
 const client = new Client();
 
 const commandFiles = fs.readdirSync(`${__dirname}/commands`).filter((file: any) => file.endsWith('.js'));
+
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	client.commands.set(command.data.name, command);
+	(async () => {
+    const commandModule = await import(`./commands/${file}`)
+		const command = commandModule.default;
+		client.commands.set(command.data.name, command);
+  })();
 }
 
 client.once('ready', () => {

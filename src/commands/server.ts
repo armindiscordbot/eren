@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 
-module.exports = {
+const server = {
 	data: new SlashCommandBuilder()
 		.setName('server')
 		.setDescription('Replies with Pong!'),
@@ -8,3 +8,5 @@ module.exports = {
 		await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
 	},
 };
+
+export default server;
